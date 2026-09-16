@@ -48,9 +48,29 @@ const el = {
   // Typewriter
   roleTypewriter: document.getElementById('role-typewriter'),
 
-  // Real-time Clock
+  // Real-time Clock (Header)
   clockTime: document.getElementById('clock-time'),
-  clockDate: document.getElementById('clock-date')
+  clockDate: document.getElementById('clock-date'),
+
+  // Circular Clock Station Elements
+  stationAvatar: document.getElementById('station-avatar'),
+  stationName: document.getElementById('station-name'),
+  stationTitle: document.getElementById('station-title'),
+  stationEditBtn: document.getElementById('station-edit-btn'),
+  timeGreeting: document.getElementById('time-greeting'),
+  clockDialArc: document.getElementById('clock-dial-arc'),
+  clockHour: document.getElementById('clock-hour'),
+  clockMin: document.getElementById('clock-min'),
+  clockSec: document.getElementById('clock-sec'),
+  clockUnix: document.getElementById('clock-unix'),
+  clockMs: document.getElementById('clock-ms'),
+  clockDateStr: document.getElementById('clock-date-str'),
+  badgeWeek: document.getElementById('badge-week'),
+  badgeDay: document.getElementById('badge-day'),
+  badgeTz: document.getElementById('badge-tz'),
+  mode24h: document.getElementById('mode-24h'),
+  mode12h: document.getElementById('mode-12h'),
+  btnCopyLiveTime: document.getElementById('btn-copy-live-time')
 };
 
 // --------------------------------------------------------------------------
@@ -104,10 +124,10 @@ function applyProfile(profile) {
   }
   el.displayBio.textContent = profile.bio;
 
-  // Hero Visual Card
-  el.cardName.textContent = profile.name;
-  el.cardTitle.textContent = profile.title;
-  el.monogramCircle.textContent = monogram;
+  // Hero Visual & Station Card
+  if (el.stationName) el.stationName.textContent = profile.name;
+  if (el.stationTitle) el.stationTitle.textContent = profile.title;
+  if (el.stationAvatar) el.stationAvatar.textContent = monogram;
 
   // Contact & Footer
   el.displayEmail.textContent = profile.email;
@@ -234,29 +254,141 @@ async function copyEmailToClipboard() {
 }
 
 // --------------------------------------------------------------------------
-// Real-time Digital Clock
+// Real-time Circular Digital Clock Station
 // --------------------------------------------------------------------------
 const WEEKDAYS = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+const ARC_CIRCUMFERENCE = 2 * Math.PI * 120; // ~753.982px
+
+let is24HourFormat = true;
+
+// Helper: Calculate ISO Week Number
+function getWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
+// Helper: Calculate Day of the Year
+function getDayOfYear(date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
 
 function updateClock() {
-  if (!el.clockTime || !el.clockDate) return;
   const now = new Date();
+  const rawHours = now.getHours();
+  const rawMinutes = now.getMinutes();
+  const rawSeconds = now.getSeconds();
+  const rawMs = now.getMilliseconds();
 
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
+  // 1. Update Header Clock
+  if (el.clockTime && el.clockDate) {
+    const hh = String(rawHours).padStart(2, '0');
+    const mm = String(rawMinutes).padStart(2, '0');
+    const ss = String(rawSeconds).padStart(2, '0');
+    const mo = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const dayName = WEEKDAYS[now.getDay()];
+    el.clockTime.textContent = `${hh}:${mm}:${ss}`;
+    el.clockDate.textContent = `${mo}/${dd} ${dayName}`;
+  }
 
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const date = String(now.getDate()).padStart(2, '0');
-  const day = WEEKDAYS[now.getDay()];
+  // 2. Update Circular Gauge Progress Arc
+  if (el.clockDialArc) {
+    const secWithFraction = rawSeconds + rawMs / 1000;
+    const progress = secWithFraction / 60;
+    const offset = ARC_CIRCUMFERENCE * (1 - progress);
+    el.clockDialArc.style.strokeDashoffset = offset;
+  }
 
-  el.clockTime.textContent = `${hours}:${minutes}:${seconds}`;
-  el.clockDate.textContent = `${month}/${date} ${day}`;
+  // 3. Update Big Digits Display (24H vs 12H)
+  if (el.clockHour && el.clockMin && el.clockSec) {
+    let displayHour = rawHours;
+    if (!is24HourFormat) {
+      displayHour = rawHours % 12 || 12;
+    }
+    el.clockHour.textContent = String(displayHour).padStart(2, '0');
+    el.clockMin.textContent = String(rawMinutes).padStart(2, '0');
+    el.clockSec.textContent = String(rawSeconds).padStart(2, '0');
+  }
+
+  // 4. Update UNIX Timestamp & Milliseconds
+  if (el.clockUnix && el.clockMs) {
+    el.clockUnix.textContent = Math.floor(now.getTime() / 1000);
+    el.clockMs.textContent = String(rawMs).padStart(3, '0');
+  }
+
+  // 5. Update Time Greeting (Good morning / afternoon / evening)
+  if (el.timeGreeting) {
+    if (rawHours < 12) {
+      el.timeGreeting.textContent = 'Good morning';
+    } else if (rawHours < 18) {
+      el.timeGreeting.textContent = 'Good afternoon';
+    } else {
+      el.timeGreeting.textContent = 'Good evening';
+    }
+  }
+
+  // 6. Update Date String (e.g. Wednesday, September 16, 2026)
+  if (el.clockDateStr) {
+    el.clockDateStr.textContent = now.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+
+  // 7. Update Metadata Badges (Week, Day, GMT)
+  if (el.badgeWeek) el.badgeWeek.textContent = `Week ${getWeekNumber(now)}`;
+  if (el.badgeDay) el.badgeDay.textContent = `Day ${getDayOfYear(now)}`;
+  if (el.badgeTz) {
+    const offsetHours = -now.getTimezoneOffset() / 60;
+    el.badgeTz.textContent = `GMT${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
+  }
 }
 
 function initRealtimeClock() {
   updateClock();
-  setInterval(updateClock, 1000);
+  // 30ms interval provides butter-smooth ms animation and circular gauge movement
+  setInterval(updateClock, 35);
+
+  // Setup 24H / 12H Format Toggles
+  el.mode24h?.addEventListener('click', () => {
+    is24HourFormat = true;
+    el.mode24h.classList.add('active');
+    el.mode12h.classList.remove('active');
+    updateClock();
+  });
+
+  el.mode12h?.addEventListener('click', () => {
+    is24HourFormat = false;
+    el.mode12h.classList.add('active');
+    el.mode24h.classList.remove('active');
+    updateClock();
+  });
+
+  // Setup Station Edit Button Trigger
+  el.stationEditBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal();
+  });
+
+  // Setup Copy Live Time Button
+  el.btnCopyLiveTime?.addEventListener('click', async () => {
+    const now = new Date();
+    const timeStr = `${el.clockHour?.textContent || ''}:${el.clockMin?.textContent || ''}:${el.clockSec?.textContent || ''} (${el.clockDateStr?.textContent || ''}, UNIX: ${Math.floor(now.getTime() / 1000)})`;
+    try {
+      await navigator.clipboard.writeText(timeStr);
+      showToast(`⏱️ 已複製即時時間：${timeStr}`);
+    } catch {
+      showToast(`⏱️ 時間已複製！`);
+    }
+  });
 }
 
 // --------------------------------------------------------------------------

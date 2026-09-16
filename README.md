@@ -54,11 +54,15 @@
   - **5+** 年開發設計經驗
   - **30+** 完成創新專案
   - **99%** 滿意與正面評價
-- **形象卡片與 3D 浮動徽章 (Visual Card)**：
-  - 發光雙環背景中的「**志騰**」專屬頭像圓圈。
-  - 身分標籤：「`全端開發者 & UI/UX 探索者`」。
-  - 精簡技術膠囊標籤：TypeScript、React / Vue、UI/UX、Node.js。
-  - 漂浮動態徽章：`⚡ 高效能架構`、`✨ 現代極致美學`。
+- **⏱️ 圓環進度儀表即時時鐘卡片 (Circular Clock Station Card)**：
+  - **動態光軌圓環 (Circular Progress Arc)**：外圍青色動態光環（Cyan Glow），每秒隨著秒數與毫秒即時計算 `strokeDashoffset` 順時針流暢轉動，極具高科技未來感。
+  - **大字體時間儀表 (Big Digits Display)**：清晰展示 `HOURS`、`MINUTES`、`SECONDS`，數字平滑等寬對齊不抖動，搭配閃爍冒號分隔。
+  - **高精度 UNIX 時間戳與毫秒計 (UNIX Timestamp & Milliseconds)**：即時顯示目前系統 Epoch 秒數與毫秒計時（例如：`UNIX: 1789561944 · 283 ms`）。
+  - **動態時間問候 (Smart Greeting)**：根據當前時間自動顯示 `Good morning` / `Good afternoon` / `Good evening` 專屬問候膠囊。
+  - **日期與時間資訊標籤 (Date & Meta Badges)**：完整英式日期字串、年週數（`Week 38`）、年度天數（`Day 259`）以及時區（`GMT+8`）。
+  - **24H / 12H 格式切換 (Format Toggle)**：支援一鍵切換 24 小時制與 12 小時制。
+  - **一鍵複製即時時間 (Copy Time)**：點選右下角按鈕即可複製當前時間至剪貼簿並彈出 Toast 提示。
+  - **快速專案與章節導航**：配置 `📁 Projects 3`、`👤 About`、`🔗 Connect` 快速捷徑。
 
 ---
 
