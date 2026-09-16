@@ -536,7 +536,7 @@ body {
 }
 
 /* ==========================================================================
-   Hero Visual / Real-Time Circular Clock Station Card
+   Hero Visual / Simple Clean Digital Clock Card
    ========================================================================== */
 .hero-visual {
   display: flex;
@@ -544,7 +544,7 @@ body {
   position: relative;
 }
 
-.clock-station-wrapper {
+.simple-clock-wrapper {
   position: relative;
   width: 100%;
   max-width: 440px;
@@ -552,50 +552,47 @@ body {
 
 .clock-glow-ambient {
   position: absolute;
-  inset: -4px;
+  inset: -6px;
   border-radius: 32px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, rgba(139, 92, 246, 0.25) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 70%);
   filter: blur(28px);
   z-index: 0;
   pointer-events: none;
   animation: pulseGlow 6s ease-in-out infinite alternate;
 }
 
-.clock-station-card {
+.simple-clock-card {
   position: relative;
   z-index: 1;
-  background: rgba(13, 19, 33, 0.88);
+  background: rgba(13, 19, 33, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 28px;
-  padding: 26px 24px;
+  padding: 34px 28px;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.clock-station-card:hover {
+.simple-clock-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(6, 182, 212, 0.3);
+  border-color: rgba(6, 182, 212, 0.35);
 }
 
-/* Station Top Header */
-.station-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.station-profile {
+.clock-user-header {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 18px;
 }
 
 .station-avatar {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #8b5cf6 100%);
   display: flex;
@@ -603,337 +600,93 @@ body {
   justify-content: center;
   color: #fff;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
   flex-shrink: 0;
 }
 
-.station-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.station-greeting-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 10px;
-  background: rgba(139, 92, 246, 0.15);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: var(--radius-full);
-  font-size: 0.72rem;
-  color: #c084fc;
-  font-weight: 600;
-  margin-bottom: 4px;
-  width: fit-content;
-}
-
-.greeting-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #c084fc;
-}
-
-.station-name-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.station-name-row h3 {
+.clock-user-info h3 {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: #fff;
   line-height: 1.2;
 }
 
-.station-edit-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-subtle);
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.station-edit-btn:hover {
-  background: var(--accent-cyan);
-  color: #000;
-  transform: scale(1.1);
-}
-
-.station-meta p {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-.station-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-full);
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.badge-bolt {
-  color: #f59e0b;
-}
-
-/* Circular Gauge Dial */
-.station-dial-container {
-  position: relative;
-  width: 280px;
-  height: 280px;
-  margin: 10px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.station-dial-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.dial-track {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.05);
-  stroke-width: 6;
-}
-
-.dial-arc {
-  fill: none;
-  stroke: #06b6d4;
-  stroke-width: 7;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.85));
-  stroke-dasharray: 753.98;
-  stroke-dashoffset: 300;
-  transition: stroke-dashoffset 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.station-digits-overlay {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.digits-clock-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 8px;
-}
-
-.digit-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 48px;
-}
-
-.digit-val {
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-}
-
-.digit-colon {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 700;
+.clock-user-info p {
+  font-size: 0.85rem;
   color: var(--accent-cyan);
-  line-height: 1;
-  opacity: 0.85;
-  animation: blinkColon 1s infinite;
-}
-
-@keyframes blinkColon {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 0.3; }
-}
-
-.digit-lbl {
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  margin-top: 6px;
-}
-
-.station-unix-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  font-family: 'JetBrains Mono', monospace, sans-serif;
-  margin-top: 14px;
-}
-
-.station-unix-pill strong {
-  color: #e2e8f0;
-  font-weight: 600;
-}
-
-.unix-sep {
-  color: var(--text-dim);
-}
-
-/* Date & Badges */
-.station-date-section {
-  text-align: center;
   margin-top: 4px;
 }
 
-.station-full-date {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #f8fafc;
-  margin-bottom: 8px;
-}
-
-.station-badges {
+/* Time Display Box */
+.time-display-box {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.badge-item {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  color: var(--text-dim);
-}
-
-/* Fast Links */
-.station-quick-nav {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.station-link-btn {
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  transition: var(--transition-smooth);
-}
-
-.station-link-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.link-count {
-  background: #3b82f6;
-  color: #fff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Footer Controls */
-.station-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 14px;
-  margin-top: 16px;
-}
-
-.station-format-toggle {
-  display: flex;
+  text-align: center;
+  padding: 28px 20px;
   background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
 }
 
-.toggle-mode {
-  background: none;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--text-dim);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.toggle-mode.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-}
-
-.station-copy-time-btn {
+.time-header-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition-smooth);
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
 }
 
-.station-copy-time-btn:hover {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  color: #000;
-  font-weight: 600;
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: pulseDot 2s infinite;
+}
+
+.time-digits {
+  font-family: 'Outfit', 'Plus Jakarta Sans', monospace, sans-serif;
+  font-size: 3.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+  text-shadow: 0 0 25px rgba(6, 182, 212, 0.45);
+}
+
+.time-date {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+/* Footer Status */
+.clock-footer-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
 }
 
 /* ==========================================================================

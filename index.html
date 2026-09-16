@@ -118,111 +118,34 @@
           </div>
         </div>
 
-        <!-- Hero Visual / Real-Time Circular Clock Station Card -->
+        <!-- Hero Visual / Simple Clean Digital Clock Card -->
         <div class="hero-visual">
-          <div class="clock-station-wrapper">
+          <div class="simple-clock-wrapper">
             <div class="clock-glow-ambient"></div>
-            <div class="clock-station-card glass-card" id="clock-station-card">
-              <!-- Top Greeting & Profile Header -->
-              <div class="station-header">
-                <div class="station-profile">
-                  <div class="station-avatar" id="station-avatar">志騰</div>
-                  <div class="station-meta">
-                    <div class="station-greeting-pill">
-                      <span class="greeting-dot"></span>
-                      <span id="time-greeting">Good evening</span>
-                    </div>
-                    <div class="station-name-row">
-                      <h3 id="station-name">志騰</h3>
-                      <button class="station-edit-btn" id="station-edit-btn" aria-label="修改姓名" title="點擊自訂個人資訊">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M12 20h9"></path>
-                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <p id="station-title">AIoT Pioneer · Full Stack</p>
-                  </div>
-                </div>
-                <div class="station-status-badge">
-                  <span class="badge-bolt">⚡</span>
-                  <span>高效即時</span>
+            <div class="simple-clock-card glass-card">
+              <!-- Profile Info -->
+              <div class="clock-user-header">
+                <div class="station-avatar" id="station-avatar">志騰</div>
+                <div class="clock-user-info">
+                  <h3 id="station-name">志騰</h3>
+                  <p id="station-title">全端開發者 · UI/UX 探索者</p>
                 </div>
               </div>
 
-              <!-- Circular Progress Gauge Clock Dial -->
-              <div class="station-dial-container">
-                <svg class="station-dial-svg" viewBox="0 0 280 280">
-                  <!-- Background Track Circle -->
-                  <circle class="dial-track" cx="140" cy="140" r="120" />
-                  <!-- Glowing Seconds Progress Arc -->
-                  <circle class="dial-arc" id="clock-dial-arc" cx="140" cy="140" r="120" />
-                </svg>
-
-                <div class="station-digits-overlay">
-                  <div class="digits-clock-row">
-                    <div class="digit-box">
-                      <span class="digit-val" id="clock-hour">20</span>
-                      <span class="digit-lbl">HOURS</span>
-                    </div>
-                    <span class="digit-colon">:</span>
-                    <div class="digit-box">
-                      <span class="digit-val" id="clock-min">32</span>
-                      <span class="digit-lbl">MINUTES</span>
-                    </div>
-                    <span class="digit-colon">:</span>
-                    <div class="digit-box">
-                      <span class="digit-val" id="clock-sec">24</span>
-                      <span class="digit-lbl">SECONDS</span>
-                    </div>
-                  </div>
-
-                  <!-- Dynamic UNIX Timestamp & Milliseconds Pill -->
-                  <div class="station-unix-pill" id="unix-pill">
-                    <span>UNIX: <strong id="clock-unix">1789561944</strong></span>
-                    <span class="unix-sep">·</span>
-                    <span><strong id="clock-ms">283</strong> ms</span>
-                  </div>
+              <!-- Main Simple Time Display -->
+              <div class="time-display-box">
+                <div class="time-header-pill">
+                  <span class="pulse-dot"></span>
+                  <span>即時本地時間 (Local Time)</span>
                 </div>
+                <div class="time-digits" id="simple-clock-time">00:00:00</div>
+                <div class="time-date" id="simple-clock-date">2026 年 9 月 16 日 星期三</div>
               </div>
 
-              <!-- Date Display & Timezone Badges -->
-              <div class="station-date-section">
-                <div class="station-full-date" id="clock-date-str">Wednesday, September 16, 2026</div>
-                <div class="station-badges">
-                  <span class="badge-item" id="badge-week">Week 38</span>
-                  <span class="badge-item" id="badge-day">Day 259</span>
-                  <span class="badge-item" id="badge-tz">GMT+8</span>
-                </div>
-              </div>
-
-              <!-- Fast Action Links -->
-              <div class="station-quick-nav">
-                <a href="#projects" class="station-link-btn">
-                  <span>📁 Projects</span>
-                  <span class="link-count">3</span>
-                </a>
-                <a href="#about" class="station-link-btn">
-                  <span>👤 About</span>
-                </a>
-                <a href="#contact" class="station-link-btn">
-                  <span>🔗 Connect</span>
-                </a>
-              </div>
-
-              <!-- Bottom Control Bar: 24H/12H & Copy Time -->
-              <div class="station-footer">
-                <div class="station-format-toggle">
-                  <button class="toggle-mode active" id="mode-24h">24H</button>
-                  <button class="toggle-mode" id="mode-12h">12H</button>
-                </div>
-                <button class="station-copy-time-btn" id="btn-copy-live-time" title="複製當前時間">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  Copy Time
-                </button>
+              <!-- Status Footer -->
+              <div class="clock-footer-status">
+                <span class="status-indicator-dot"></span>
+                <span>系統時鐘即時同步運行中</span>
               </div>
             </div>
           </div>
