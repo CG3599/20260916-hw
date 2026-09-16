@@ -5,9 +5,22 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-線上造訪展示頁-06b6d4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://cg3599.github.io/20260916-hw/)
 [![GitHub](https://img.shields.io/badge/GitHub-專案儲存庫-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/CG3599/20260916-hw)
 
+---
+
+## 📸 網站實體畫面 (Live View)
+
+[![Live View](assets/live-preview.png)](https://cg3599.github.io/20260916-hw/)
+
+> 🌐 **線上體驗網址 (Live Demo)**：👉 [https://cg3599.github.io/20260916-hw/](https://cg3599.github.io/20260916-hw/)  
+> *(點擊上方圖片或連結即可直接前往線上網站，體驗即時更名與微互動動效)*
+
+---
+
+## 📌 專案基本資訊
+
 本專案為 **AIoT-DA** 課程第 1 單元（**DIC-1**）實作專題作業，聚焦於打造具備現代極致美學、設計系統規範（Design System Aesthetic）與純個人品牌導向（非天氣/氣象相關）的個人形象網站。
 
-- 🌐 **線上展示 (Live Demo)**：👉 [https://cg3599.github.io/20260916-hw/](https://cg3599.github.io/20260916-hw/)
+- 🌐 **線上展示 (Live Demo)**：[https://cg3599.github.io/20260916-hw/](https://cg3599.github.io/20260916-hw/)
 - 💻 **GitHub 儲存庫**：[https://github.com/CG3599/20260916-hw](https://github.com/CG3599/20260916-hw)
 - 📅 **實作日期**：2026-09-16
 - 🏷️ **專案性質**：純個人品牌與作品集入口（Personal Portfolio & Profile）
@@ -16,7 +29,7 @@
 
 ## 🌟 線上展示頁內容完整介紹 (What's on the Live Page)
 
-目前於線上展示頁 [https://cg3599.github.io/20260916-hw/](https://cg3599.github.io/20260916-hw/) 中，完整包含以下 7 大核心區塊與互動體驗：
+目前於線上展示頁中，完整包含以下 7 大核心區塊與互動體驗：
 
 ### 1. 頂部導航列 (Navigation Bar)
 - **品牌 Logo 與 Monogram**：左側展示霓虹漸層徽章「A」與個人識別名稱「Alex Chen」。
@@ -31,7 +44,7 @@
   - 超大字體搭配霓虹漸層光感「**Alex Chen**」。
   - 旁附有**即時編輯鉛筆圖示**，使用者直接點擊姓名即可迅速跳出編輯視窗進行改名。
 - **動態打字機副標題 (Typewriter)**：
-  - 動態循環輪播：「`致力於打造 卓越的數位體驗 / 現代全端應用系統 / 精緻直覺的 UI/UX / 高效能雲端架構`」。
+  - 動態循環輪播：「`致力於打造 卓越的數位體驗 / 現代全端應用系統 / 精緻直ateur UI/UX / 高效能雲端架構`」。
 - **個人簡述 (Bio)**：「熱愛探索科技與視覺設計的完美交匯點，擅長運用現代化技術構建高效、具美感且直覺的數位產品與互動介面。」
 - **雙主行動按鈕 (CTA)**：
   - 「**立即與我聯繫**」（霓虹漸層高光按鈕，點擊平滑滾動至聯絡區）。
@@ -95,9 +108,11 @@
 
 ```text
 20260916/
-├── index.html        # 語義化 HTML5 骨幹（各區塊、形象卡片、自訂彈窗與 Toast）
-├── style.css         # 現代 CSS 設計系統、深色毛玻璃、光暈動效、排版與響應式斷點
-├── script.js         # 原生 JavaScript 互動邏輯（打字機、游標光暈、LocalStorage 持久化、一鍵複製）
-├── README.md         # 專案與線上展示內容完整說明文件
-└── .gitignore        # Git 版本控制忽略設定檔
+├── assets/
+│   └── live-preview.png  # 網站實際畫面截圖 (Live View)
+├── index.html            # 語義化 HTML5 骨幹（各區塊、形象卡片、自訂彈窗與 Toast）
+├── style.css             # 現代 CSS 設計系統、深色毛玻璃、光暈動效、排版與響應式斷點
+├── script.js             # 原生 JavaScript 互動邏輯（打字機、游標光暈、LocalStorage 持久化、一鍵複製）
+├── README.md             # 專案與線上展示內容完整說明文件（含 Live View 截圖與連結）
+└── .gitignore            # Git 版本控制忽略設定檔
 ```
