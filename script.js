@@ -46,7 +46,11 @@ const el = {
   toastMsg: document.getElementById('toast-msg'),
 
   // Typewriter
-  roleTypewriter: document.getElementById('role-typewriter')
+  roleTypewriter: document.getElementById('role-typewriter'),
+
+  // Real-time Clock
+  clockTime: document.getElementById('clock-time'),
+  clockDate: document.getElementById('clock-date')
 };
 
 // --------------------------------------------------------------------------
@@ -230,9 +234,37 @@ async function copyEmailToClipboard() {
 }
 
 // --------------------------------------------------------------------------
+// Real-time Digital Clock
+// --------------------------------------------------------------------------
+const WEEKDAYS = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+
+function updateClock() {
+  if (!el.clockTime || !el.clockDate) return;
+  const now = new Date();
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const date = String(now.getDate()).padStart(2, '0');
+  const day = WEEKDAYS[now.getDay()];
+
+  el.clockTime.textContent = `${hours}:${minutes}:${seconds}`;
+  el.clockDate.textContent = `${month}/${date} ${day}`;
+}
+
+function initRealtimeClock() {
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+// --------------------------------------------------------------------------
 // 7. Event Listeners & Initialization
 // --------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Real-time clock
+  initRealtimeClock();
   // Set current year
   if (el.currentYear) {
     el.currentYear.textContent = new Date().getFullYear();
