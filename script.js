@@ -6,9 +6,9 @@
 
 // Default Profile Data
 const DEFAULT_PROFILE = {
-  name: 'Alex Chen',
+  name: '志騰',
   title: '全端開發者 & UI/UX 探索者',
-  email: 'alex.chen.dev@example.com',
+  email: 'zhiteng.dev@example.com',
   bio: '熱愛探索科技與視覺設計的完美交匯點，擅長運用現代化技術構建高效、具美感且直覺的數位產品與互動介面。'
 };
 
